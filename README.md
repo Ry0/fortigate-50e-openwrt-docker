@@ -21,8 +21,8 @@ https://docs.docker.com/engine/install/ubuntu/
 以下を実行する。devcontainerを使っている人はそのままGUI操作で開いてよい。
 
 ```bash
-docker image build -t fortigate-e50-openwrt-docker .
-docker run --name fortigate-e50-openwrt-docker-container -it fortigate-e50-openwrt-docker /bin/bash
+docker image build -t fortigate-50e-openwrt-docker .
+docker run --name fortigate-50e-openwrt-docker-container -it fortigate-50e-openwrt-docker /bin/bash
 ```
 
 基本的には、以下に参考にDockerコンテナで実行できるようにした。
@@ -48,6 +48,23 @@ File Nameに`6.12.71-1-a1b7fd67aef9ff09b98d2d5a9698c83d/`とあるので、`a1b7
 
 ```bash
 make -j$(nproc)
+```
+
+と出力されたら終わり。
+ 
+```bash
+ make[3] -C package/kernel/ath10k-ct clean-build
+ make[3] -C package/kernel/ath10k-ct compile
+ make[2] package/install
+ make[2] target/install
+ make[3] -C target/toolchain install
+ make[3] -C target/linux install
+ make[3] -C target/llvm-bpf install
+ make[3] -C target/sdk install
+ make[3] -C target/imagebuilder install
+ make[2] package/index
+ make[2] json_overview_image_info
+ make[2] checksum
 ```
 
 `bin/targets/mvebu/cortexa9/`に必要なファイルが出力されていることを確認。
